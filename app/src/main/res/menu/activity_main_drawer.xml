@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/ic_launcher_background">
+<!--    <group android:id="@+id/group1"-->
+<!--        android:checkableBehavior="single">-->
+
+<!--    </group>-->
+    <group android:checkableBehavior="single"
+        android:id="@+id/group1">
+        <item android:id="@+id/nav_lblLoggedUser"
+            android:title="">
+            <menu>
+                <item
+                    android:id="@+id/nav_logoutUser"
+                    android:icon="@drawable/icon_logout"
+                    android:title="Logout" />
+            </menu>
+        </item>
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/group2">
+        <item
+            android:title="Settings">
+            <menu>
+                <item
+                    android:icon="@drawable/icon_bluetooth"
+                    android:id="@+id/nav_bluetooth"
+                    android:title="Bluetooth" />
+            </menu>
+        </item>
+    </group>
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/group3">
+        <item
+            android:title="Commands">
+            <menu>
+                <item
+                    android:icon="@drawable/icon_common"
+                    android:id="@+id/nav_Common"
+                    android:title="Common" />
+                <item
+                    android:icon="@drawable/icon_network"
+                    android:id="@+id/nav_Network"
+                    android:title="Network" />
+            </menu>
+        </item>
+    </group>
+</menu>
