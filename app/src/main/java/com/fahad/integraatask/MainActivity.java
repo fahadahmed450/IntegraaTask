@@ -34,6 +34,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
@@ -200,31 +201,72 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<PermissionResponse> call, Response<PermissionResponse> response) {
                     //if response is 200
-                    if (response.isSuccessful()) {
-                        PermissionResponse permissionResponse = response.body();
-                        if (permissionResponse != null) {
-
-//                            String label = permissionResponse.getActions().getCommon().getItems().getOpen().getLabel();
-//                            String permission = permissionResponse.getActions().getCommon().getItems().getOpen().getPayload();
-//                            // navigate through the nested structures and access the data
+//                    if (response.isSuccessful()) {
+//                        PermissionResponse permissionResponse = response.body();
+//                        if (permissionResponse != null) {
 //
-//                            //Save waterPermission info in
-//                            Cursor cursor = db.GetData("SELECT * FROM " + db.TABLE_Common + " WHERE ID=1");
-//                            if (cursor.getCount() > 0) {
-//                                boolean isUpdate = db.UpdateCommonPermission(label, permission);
-//                                if (isUpdate) {
-//                                }
-//                            } else {
-//                                boolean isInsert = db.InsertCommonPermission(label, permission);
-//                                if (isInsert) {
+//
+//
+////                            String label = permissionResponse.getActions().getCommon().getItems().getOpen().getLabel();
+////                            String permission = permissionResponse.getActions().getCommon().getItems().getOpen().getPayload();
+////                            // navigate through the nested structures and access the data
+////
+////                            //Save waterPermission info in
+////                            Cursor cursor = db.GetData("SELECT * FROM " + db.TABLE_Common + " WHERE ID=1");
+////                            if (cursor.getCount() > 0) {
+////                                boolean isUpdate = db.UpdateCommonPermission(label, permission);
+////                                if (isUpdate) {
+////                                }
+////                            } else {
+////                                boolean isInsert = db.InsertCommonPermission(label, permission);
+////                                if (isInsert) {
+////                                }
+////                            }
+//                        }
+//                    } else {
+//                        //response is not 200 and then logout
+//                        Intent i = new Intent(MainActivity.this, LoginActivity.class);
+//                        startActivity(i);
+//                        finish();
+//                    }
+
+                    PermissionResponse actionResponse = response.body();
+//                    for (PermissionResponse.Action action : actionResponse.getActions()) {
+//                        for (PermissionResponse.Action.Item item : action.getItems()) {
+//                            if (item.getParameters() != null) {
+//
+//                                String lab = item.getLabel();
+//                                String payload = item.getPayload();
+//                                for (Map.Entry<String, PermissionResponse.Checksum> entry : item.getParameters().entrySet()) {
+//                                    String dynamicKey = entry.getKey();
+//                                    PermissionResponse.Checksum checksum = entry.getValue();
+//
+//                                    // Use the dynamic key and checksum value as needed
+//                                    System.out.println("Dynamic Key: " + dynamicKey);
+//                                    System.out.println("Checksum Type: " + checksum.getType());
 //                                }
 //                            }
+//                        }
+//                    }
+                    for (PermissionResponse.Action action : actionResponse.getActions()) {
+                        System.out.println("Action Label: " + action.getLabel());
+
+                        for (PermissionResponse.Action.Item item : action.getItems()) {
+                            System.out.println("Item Label: " + item.getLabel());
+                            System.out.println("Payload: " + item.getPayload());
+
+                            if (item.getParameters() != null) {
+                                for (Map.Entry<String, PermissionResponse.Parameter> entry : item.getParameters().entrySet()) {
+                                    String dynamicKey = entry.getKey();
+                                    PermissionResponse.Parameter parameter = entry.getValue();
+
+                                    System.out.println("Dynamic Key: " + dynamicKey);
+                                    System.out.println("Parameter Type: " + parameter.getType());
+                                    System.out.println("Parameter Label: " + parameter.getLabel());
+                                    // Handle other parameter attributes as needed
+                                }
+                            }
                         }
-                    } else {
-                        //response is not 200 and then logout
-                        Intent i = new Intent(MainActivity.this, LoginActivity.class);
-                        startActivity(i);
-                        finish();
                     }
                 }
 
