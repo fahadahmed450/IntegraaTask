@@ -254,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                             portNo = "8080";
                         }
                         else if(lbl.equals("Port 2")) {
-                            portNo = "808177777";
+                            portNo = "8081";
                         }
                         if (parameter.getRequired() != null && !portNo.matches(rgex)) {
                             showToast("Invalid value for " + parameter.getLabel());
